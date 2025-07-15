@@ -90,7 +90,13 @@ function Account() {
       const data = await res.json();
       if (res.ok) {
         toast.success("Avatar updated successfully!");
-        setAvatarUrl(data.avatar || data.updated.avatar);
+
+        const newAvatar = data.avatar || data.updated?.avatar;
+        const fullUrl = newAvatar.startsWith("http")
+          ? newAvatar
+          : `${apiUrl}/${newAvatar}`;
+
+        setAvatarUrl(fullUrl);
         fetchProfile();
       } else {
         toast.error(data.error || "Upload failed");
@@ -107,7 +113,9 @@ function Account() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 mb-24 bg-white text-[#2d2d2d] rounded-xl shadow-md">
       <div className="w-full max-w-md bg-white shadow rounded p-6">
-        <h1 className="text-3xl font-bold mb-6 text-green-500 mt-10">My Profile</h1>
+        <h1 className="text-3xl font-bold mb-6 text-green-500 mt-10">
+          My Profile
+        </h1>
 
         {/* Avatar Section */}
         <div className="text-center mb-4">
@@ -118,6 +126,8 @@ function Account() {
               className="w-32 h-32 object-cover rounded-full mx-auto mb-2"
             />
           )}
+          <p className="text-xs text-gray-400 break-all">{avatarUrl}</p>
+
           <input type="file" accept="image/*" onChange={handleFileChange} />
           <button
             onClick={handleUploadAvatar}
