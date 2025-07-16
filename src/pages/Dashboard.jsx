@@ -83,7 +83,7 @@ function Dashboard() {
   async function deleteTodo(todoId) {
     try {
       const userConfirmed = window.confirm(
-        "Are you sure you want to delete this Todos?"
+        "Are you sure you want to delete this Task?"
       );
       if (!userConfirmed) {
         toast.error("Deletion cancelled");
@@ -128,7 +128,7 @@ function Dashboard() {
         toast.success(`Status updated to ${newStatus}`);
         getAllTodos();
       } else {
-        toast.error("Failed to update todo status");
+        toast.error("Failed to update task status");
       }
 
       setIsLoading(false);
@@ -160,7 +160,7 @@ function Dashboard() {
         onSubmit={submitHandler}
       >
         <h2 className="text-2xl font-bold mb-4">
-          {editMode ? "Edit Todo" : "Add Todo"}
+          {editMode ? "Edit Task" : "Add Task"}
         </h2>
 
         <div className="mb-4">
@@ -207,7 +207,7 @@ function Dashboard() {
               : "bg-blue-500 hover:bg-blue-700 text-white"
           }`}
         >
-          {editMode ? "Update Todo" : "Add Todo"}
+          {editMode ? "Update Task" : "Add Task"}
         </button>
       </form>
 
@@ -233,7 +233,7 @@ function Dashboard() {
       </div>
 
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg mt-10">
-        <h2 className="text-2xl font-bold mb-4">Todo List</h2>
+        <h2 className="text-2xl font-bold mb-4">Task List</h2>
         <table className="w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
@@ -247,7 +247,7 @@ function Dashboard() {
             {filteredTodos.length === 0 ? (
               <tr>
                 <td colSpan="4" className="py-6 text-center text-gray-500">
-                  No todos found for this filter.
+                  No tasks found for this filter.
                 </td>
               </tr>
             ) : (
