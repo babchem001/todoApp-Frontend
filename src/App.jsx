@@ -8,6 +8,7 @@ import Logout from "./pages/Logout";
 import Dashboard from "./pages/Dashboard";
 import Todo from "./pages/Todo";
 import Account from "./pages/Account";
+import Wallet from "./pages/Wallet";
 import { storeContext } from "./assets/context/storeContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/logout" element={isAuth ? <Logout /> : <Login />} />
         <Route path="/todo/:todoId" element={isAuth ? <Todo /> : <Login />} />
         <Route path="/account" element={isAuth ? <Account /> : <Login />} />
+        <Route path="/wallet" element={isAuth ? <Wallet /> : <Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>
