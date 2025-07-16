@@ -213,16 +213,16 @@ function Dashboard() {
 
       {/* Filter Buttons */}
       <div className="mb-4 flex gap-2">
-        {["all", "pending", "in-progress", "completed"].map((type) => (
+        {["All", "Pending", "In-progress", "Completed"].map((type) => (
           <button
             key={type}
             onClick={() => setFilter(type)}
             className={`px-3 py-1 rounded text-white ${
-              type === "all"
+              type === "All"
                 ? "bg-blue-600"
-                : type === "pending"
+                : type === "Pending"
                 ? "bg-gray-600"
-                : type === "in-progress"
+                : type === "In-progress"
                 ? "bg-yellow-500"
                 : "bg-green-600"
             }`}
@@ -260,9 +260,9 @@ function Dashboard() {
                   <td className="py-4 px-6 capitalize font-semibold">
                     <span
                       className={
-                        todo.status === "completed"
+                        todo.status === "Completed"
                           ? "text-green-600"
-                          : todo.status === "in-progress"
+                          : todo.status === "In-progress"
                           ? "text-yellow-500"
                           : "text-gray-500"
                       }
@@ -302,9 +302,9 @@ function Dashboard() {
                           key={status}
                           onClick={() => updateStatus(todo.id, status)}
                           className={`text-xs px-2 py-1 rounded ${
-                            status === "pending"
+                            status === "Pending"
                               ? "bg-gray-300 text-gray-800"
-                              : status === "in-progress"
+                              : status === "In-progress"
                               ? "bg-yellow-400 text-white"
                               : "bg-green-500 text-white"
                           }`}
