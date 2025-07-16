@@ -129,7 +129,7 @@ function Account() {
               className="w-32 h-32 object-cover rounded-full mx-auto mb-2"
             />
           )}
-          {avatarUrl ? (
+          {/* {avatarUrl ? (
             <img
               src={avatarUrl}
               alt="Profile"
@@ -137,7 +137,7 @@ function Account() {
             />
           ) : (
             <div className="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-2" />
-          )}
+          )} */}
           {/* <p className="text-xs text-gray-400 break-all">{avatarUrl}</p> */}
 
           <input type="file" accept="image/*" onChange={handleFileChange} />
