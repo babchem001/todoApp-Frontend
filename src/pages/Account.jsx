@@ -25,20 +25,23 @@ function Account() {
       const res = await fetch(`${apiUrl}/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
       const data = await res.json();
 
-      if (res.ok) {
-        setProfile(data.profile);
-        setName(data.profile.name || "");
-        setBio(data.profile.bio || "");
-        setAvatarUrl(data.profile.avatar || "");
-      } else {
-        toast.error(data.error || "Failed to fetch profile");
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to fetch profile");
       }
+
+      setProfile(data.profile);
+      setName(data.profile.name || "");
+      setBio(data.profile.bio || "");
+      setAvatarUrl(data.profile.avatar || "");
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching profile:", err);
+      toast.error(err.message || "An error occurred while loading profile.");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const updateHandler = async (e) => {
@@ -125,6 +128,15 @@ function Account() {
               alt="Profile"
               className="w-32 h-32 object-cover rounded-full mx-auto mb-2"
             />
+          )}
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt="Profile"
+              className="w-32 h-32 object-cover rounded-full mx-auto mb-2"
+            />
+          ) : (
+            <div className="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-2" />
           )}
           {/* <p className="text-xs text-gray-400 break-all">{avatarUrl}</p> */}
 
