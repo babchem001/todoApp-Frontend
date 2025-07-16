@@ -213,12 +213,12 @@ function Dashboard() {
 
       {/* Filter Buttons */}
       <div className="mb-4 flex gap-2">
-        {["All", "Pending", "In-progress", "Completed"].map((type) => (
+        {["all", "Pending", "In-progress", "Completed"].map((type) => (
           <button
             key={type}
             onClick={() => setFilter(type)}
             className={`px-3 py-1 rounded text-white ${
-              type === "All"
+              type === "all"
                 ? "bg-blue-600"
                 : type === "Pending"
                 ? "bg-gray-600"
