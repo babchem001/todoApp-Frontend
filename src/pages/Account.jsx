@@ -20,24 +20,21 @@ function Account() {
   }, []);
 
   const fetchProfile = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const res = await fetch(`${apiUrl}/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to fetch profile");
-      }
+      if (!res.ok) throw new Error(data.message || "Failed to fetch profile");
 
       setProfile(data.profile);
       setName(data.profile.name || "");
       setBio(data.profile.bio || "");
       setAvatarUrl(data.profile.avatar || "");
     } catch (err) {
-      console.error("Error fetching profile:", err);
       toast.error(err.message || "An error occurred while loading profile.");
     } finally {
       setIsLoading(false);
@@ -46,8 +43,8 @@ function Account() {
 
   const updateHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const res = await fetch(`${apiUrl}/profile/update`, {
         method: "PUT",
         headers: {
@@ -58,6 +55,7 @@ function Account() {
       });
 
       const data = await res.json();
+
       if (res.ok) {
         toast.success(data.message);
         fetchProfile();
@@ -66,9 +64,10 @@ function Account() {
         toast.error(data.error || "Failed to update profile");
       }
     } catch (err) {
-      console.error(err);
+      toast.error("Error updating profile");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const handleFileChange = (e) => {
@@ -84,29 +83,27 @@ function Account() {
     try {
       const res = await fetch(`${apiUrl}/profile/updateavatar`, {
         method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
         body: formData,
       });
 
       const data = await res.json();
+
       if (res.ok) {
-        toast.success("Avatar updated successfully!");
+        toast.success("Avatar updated successfully");
 
-        const newAvatar = data.avatar || data.updated?.avatar;
-        const fullUrl = newAvatar.startsWith("http")
-          ? newAvatar
-          : `${apiUrl}/${newAvatar}`;
+        const avatarPath = data.avatar || data.updated?.avatar || "";
+        const formattedUrl = avatarPath.startsWith("http")
+          ? avatarPath
+          : `${apiUrl.replace(/\/$/, "")}/${avatarPath.replace(/^\/+/, "")}`;
 
-        setAvatarUrl(fullUrl);
+        setAvatarUrl(formattedUrl);
         fetchProfile();
       } else {
         toast.error(data.error || "Upload failed");
       }
     } catch (err) {
-      console.error(err);
-      toast.error("Upload error");
+      toast.error("Error uploading avatar");
     }
   };
 
@@ -122,14 +119,7 @@ function Account() {
 
         {/* Avatar Section */}
         <div className="text-center mb-4">
-          {avatarUrl && (
-            <img
-              src={avatarUrl}
-              alt="Profile"
-              className="w-32 h-32 object-cover rounded-full mx-auto mb-2"
-            />
-          )}
-          {/* {avatarUrl ? (
+          {avatarUrl ? (
             <img
               src={avatarUrl}
               alt="Profile"
@@ -137,13 +127,11 @@ function Account() {
             />
           ) : (
             <div className="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-2" />
-          )} */}
-          {/* <p className="text-xs text-gray-400 break-all">{avatarUrl}</p> */}
-
+          )}
           <input type="file" accept="image/*" onChange={handleFileChange} />
           <button
             onClick={handleUploadAvatar}
-            className="bg-blue-500 text-white px-4 py-2 rounded mt-10"
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
           >
             Upload Photo
           </button>
@@ -196,7 +184,7 @@ function Account() {
             </p>
             <button
               onClick={() => setEditMode(true)}
-              className="mt-2 bg-purple-600 text-white px-4 py-2 rounded w-35 hover:bg-purple-700 cursor-pointer font-medium"
+              className="mt-2 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 cursor-pointer font-medium"
             >
               Edit Bio
             </button>
