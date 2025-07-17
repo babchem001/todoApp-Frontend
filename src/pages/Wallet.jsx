@@ -11,9 +11,11 @@ function Wallet() {
   const [sendAmount, setSendAmount] = useState("");
   const [recipientEmail, setRecipientEmail] = useState("");
 
-  const   apiUrl  = import.meta.env.VITE_BACKEND_URL;
+//   const   apiUrl  = import.meta.env.VITE_BACKEND_URL;
+  const { token, apiUrl } =
+      useContext(storeContext);
 
-  const token = localStorage.getItem("token");
+//   const token = localStorage.getItem("token");
 
 
   // Persisted transaction tab (all | fund | sent | received)
@@ -215,9 +217,9 @@ function Wallet() {
           <p className="text-gray-500 text-sm">No transactions found.</p>
         ) : (
           <ul className="text-sm space-y-2 max-h-64 overflow-y-auto">
-            {filteredTransactions.map((tx) => (
+            {filteredTransactions.map((tx, index) => (
               <li
-                key={tx.id}
+                key={index}
                 className="border p-2 rounded flex justify-between items-center"
               >
                 <span>
