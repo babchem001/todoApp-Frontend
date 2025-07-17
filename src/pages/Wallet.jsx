@@ -12,6 +12,8 @@ function Wallet() {
 
   const token = localStorage.getItem("token");
 
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
   // Persisted transaction tab (all | fund | sent | received)
   const [selectedTab, setSelectedTab] = useState(
     localStorage.getItem("walletTab") || "all"
@@ -26,8 +28,10 @@ function Wallet() {
 
   const fetchWallet = async () => {
     try {
-      const res = await fetch("/wallet", {
+      const res = await fetch(`${apiUrl}/wallet`, {
+        method: "GET",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -52,7 +56,7 @@ function Wallet() {
     }
 
     try {
-      const res = await fetch("/wallet/fundwallet", {
+      const res = await fetch(`${apiUrl}/wallet/fundwallet`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +86,7 @@ function Wallet() {
     }
 
     try {
-      const res = await fetch("/wallet/sendmoney", {
+      const res =  await fetch(`${apiUrl}/wallet/sendmoney`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
