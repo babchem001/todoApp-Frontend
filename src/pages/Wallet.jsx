@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { storeContext } from "../assets/context/storeContext";
 import { toast } from "react-toastify";
 // import { Link } from "react-router-dom";
 
@@ -10,9 +11,10 @@ function Wallet() {
   const [sendAmount, setSendAmount] = useState("");
   const [recipientEmail, setRecipientEmail] = useState("");
 
+  const  { apiUrl } = useContext(storeContext);
+
   const token = localStorage.getItem("token");
 
-  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
   // Persisted transaction tab (all | fund | sent | received)
   const [selectedTab, setSelectedTab] = useState(
