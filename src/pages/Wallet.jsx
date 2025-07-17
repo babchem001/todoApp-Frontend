@@ -11,7 +11,7 @@ function Wallet() {
   const [sendAmount, setSendAmount] = useState("");
   const [recipientEmail, setRecipientEmail] = useState("");
 
-  const  { apiUrl } = useContext(storeContext);
+  const   apiUrl  = import.meta.env.VITE_BACKEND_URL;
 
   const token = localStorage.getItem("token");
 
