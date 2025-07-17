@@ -86,7 +86,7 @@ function Navbar() {
                   <NavLink
                     to="/wallet"
                     activeclassname="active"
-                    className="block py-2 px-3 mt-2 text-green-700 rounded hover:bg-green-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-green-400 dark:hover:text-green-300 dark:focus:text-white dark:focus:bg-gray-700 dark:hover:bg-gray-600 md:dark:hover:bg-transparent"
+                    className="block py-2 px-3 mt-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:focus:bg-gray-700 dark:hover:bg-gray-600 md:dark:hover:bg-transparent"
                   >
                     My Wallet
                   </NavLink>
