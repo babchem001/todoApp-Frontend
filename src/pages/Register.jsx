@@ -23,10 +23,8 @@ function Register() {
     setName,
   } = useContext(storeContext);
 
-  
   useEffect(() => {
     setIsLoading(false);
-    
   }, []);
 
   const navigate = useNavigate();
@@ -68,7 +66,7 @@ function Register() {
         }),
       });
       const data = await response.json();
-      console.log(data)
+      console.log(data);
 
       if (!response.ok) {
         // toast.error(data.message[0].message);
@@ -105,13 +103,11 @@ function Register() {
     <div>
       <div className="flex items-center justify-center h-screen bg-[#f3f0f9] text-[#2d2d2d]">
         <div className=" p-12 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold">Register on our TaskNext App today</h1>
-          <p className="mt-4 mb-8 text-gray-600">
-          Let’s get productive.
-          </p>
-          <h4 className="text-2xl font-bold">
-          Create an Account
-          </h4>
+          <h1 className="text-3xl font-bold">
+            Register on our TaskNext App today
+          </h1>
+          <p className="mt-4 mb-8 text-gray-600">Let’s get productive.</p>
+          <h4 className="text-2xl font-bold">Create an Account</h4>
           <form onSubmit={submitHandler} className="mt-8 space-y-6">
             <div className="relative">
               <input
@@ -123,22 +119,6 @@ function Register() {
                 required
               />
 
-              {/* <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-gold-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                  />
-                </svg>
-              </span> */}
               <div>
                 <label htmlFor="email" className="sr-only">
                   Name
@@ -153,46 +133,24 @@ function Register() {
                     value={name}
                     required
                   />
-
-                  {/* <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 text-gold-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                      />
-                    </svg>
-                  </span> */}
                 </div>
               </div>
-
-              {/* <i className="fas fa-at absolute right-3 top-3 text-gray-400"></i> */}
             </div>
             <div className="relative">
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 className="block appearance-none w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 required
               />
-              <i
-                className="fas fa-eye absolute right-3 top-3 text-gray-400"
-              />
 
               <span
-              className="absolute inset-y-0 end-0 grid place-content-center px-4"
-                  onClick={togglePassword}
-                >
-                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                className="absolute inset-y-0 end-0 grid place-content-center px-4"
+                onClick={togglePassword}
+              >
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
             <button
