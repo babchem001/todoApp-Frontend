@@ -17,11 +17,13 @@ function Register() {
     apiUrl,
     isLoading,
     setIsLoading,
-    showPassword,
-    setShowPassword,
+    // showPassword,
+    // setShowPassword,
     name,
     setName,
   } = useContext(storeContext);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setIsLoading(false);
@@ -190,10 +192,10 @@ function Register() {
               />
 
               <span
-                className="absolute inset-y-0 end-0 grid place-content-center px-4"
+                className="absolute inset-y-0 end-0 grid place-content-center px-4 cursor-pointer"
                 onClick={togglePassword}
               >
-                {showPassword ? <FaEye /> : <FaEyeSlash />}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
             <button
