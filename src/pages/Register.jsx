@@ -40,11 +40,54 @@ function Register() {
     setIsLoading(true);
 
     // validate form
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long");
+
+    const complexityOptions = {
+      min: 10,
+      max: 30,
+      lowerCase: 1,
+      upperCase: 1,
+      numeric: 1,
+      symbol: 1,
+      requirementCount: 4,
+    };
+
+    const isPasswordComplex = (password) => {
+      const {
+        min,
+        max,
+        lowerCase,
+        upperCase,
+        numeric,
+        symbol,
+        requirementCount,
+      } = complexityOptions;
+
+      let count = 0;
+
+      if ((password.match(/[a-z]/g) || []).length >= lowerCase) count++;
+      if ((password.match(/[A-Z]/g) || []).length >= upperCase) count++;
+      if ((password.match(/[0-9]/g) || []).length >= numeric) count++;
+      if ((password.match(/[^a-zA-Z0-9]/g) || []).length >= symbol) count++;
+
+      const lengthValid = password.length >= min && password.length <= max;
+
+      return lengthValid && count >= requirementCount;
+    };
+
+    if (!isPasswordComplex(password)) {
+      toast.error(
+        "Password must be 10-30 characters long and include at least one uppercase letter, one lowercase letter, one number, and one symbol."
+      );
       setIsLoading(false);
       return;
     }
+    
+
+    // if (password.length < 10) {
+    //   toast.error("Password must be at least 6 characters long");
+    //   setIsLoading(false);
+    //   return;
+    // }
 
     if (email.length < 6) {
       toast.error("Email must be at least 6 characters long");
