@@ -4,10 +4,16 @@ import { storeContext } from "../context/storeContext";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuth } = useContext(storeContext);
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -58,6 +64,7 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/"
+                    onClick={closeMenu}
                     activeclassname="active"
                     className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:focus:bg-gray-700 dark:hover:bg-gray-600 md:dark:hover:bg-transparent"
                   >
@@ -67,6 +74,7 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/dashboard"
+                    onClick={closeMenu}
                     activeclassname="active"
                     className="block py-2 px-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 dark:hover:text-white"
                   >
@@ -76,6 +84,7 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/account"
+                    onClick={closeMenu}
                     activeclassname="active"
                     className="block py-2 px-3 mt-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:focus:bg-gray-700 dark:hover:bg-gray-600 md:dark:hover:bg-transparent"
                   >
@@ -85,6 +94,7 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/wallet"
+                    onClick={closeMenu}
                     activeclassname="active"
                     className="block py-2 px-3 mt-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:focus:bg-gray-700 dark:hover:bg-gray-600 md:dark:hover:bg-transparent"
                   >
@@ -94,6 +104,7 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/logout"
+                    onClick={closeMenu}
                     activeclassname="active"
                     className="block py-2 pr-4 px-3 mt-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:focus:bg-gray-700 dark:hover:bg-gray-600 md:dark:hover:bg-transparent"
                   >
@@ -106,6 +117,7 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/register"
+                    onClick={closeMenu}
                     className="block py-2 px-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 dark:hover:text-white"
                   >
                     Register
@@ -114,6 +126,7 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/login"
+                    onClick={closeMenu}
                     className="block py-2 px-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 dark:hover:text-white"
                   >
                     Login
